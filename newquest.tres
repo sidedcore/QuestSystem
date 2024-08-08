@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=11 format=3 uid="uid://dtq453xkkcgig"]
+
+[ext_resource type="Script" path="res://addons/QuestSystem/scripts/QuestStage.cs" id="1_e62c2"]
+[ext_resource type="Texture2D" uid="uid://8gr1q0tgibgf" path="res://icon.svg" id="1_gdasn"]
+[ext_resource type="Script" path="res://addons/QuestSystem/scripts/Quest.cs" id="1_xkq45"]
+[ext_resource type="Script" path="res://addons/QuestSystem/QuestStageObjectives/HasItem.cs" id="2_7qbj2"]
+[ext_resource type="Script" path="res://addons/QuestSystem/QuestStageObjectives/HasResource.cs" id="3_wmics"]
+
+[sub_resource type="Resource" id="Resource_38oxs"]
+script = ExtResource("2_7qbj2")
+TargetName = "Cell Key"
+ObjectiveTargetQuantity = 1
+ObjectiveComplete = false
+
+[sub_resource type="Resource" id="Resource_4xyp3"]
+script = ExtResource("3_wmics")
+TargetName = "Stone"
+ObjectiveTargetQuantity = 200
+ObjectiveComplete = false
+
+[sub_resource type="Resource" id="Resource_tkn8r"]
+script = ExtResource("1_e62c2")
+QuestStageId = 100
+QuestStageDescription = "Gather resources"
+stageObjectives = Array[Resource]([SubResource("Resource_38oxs"), SubResource("Resource_4xyp3")])
+NextQuestStage = -1
+
+[sub_resource type="Resource" id="Resource_urc8k"]
+script = ExtResource("3_wmics")
+TargetName = "Car"
+ObjectiveTargetQuantity = 1
+ObjectiveComplete = false
+
+[sub_resource type="Resource" id="Resource_6acc5"]
+script = ExtResource("1_e62c2")
+QuestStageId = 101
+QuestStageDescription = "Get a new car"
+stageObjectives = Array[Object]([SubResource("Resource_urc8k")])
+NextQuestStage = -1
+
+[resource]
+script = ExtResource("1_xkq45")
+QuestId = 10001
+QuestStatus = 1
+QuestIcon = ExtResource("1_gdasn")
+QuestTitle = "This is a sample quest"
+QuestDescription = "The description will go here"
+isActive = false
+QuestStages = Array[Resource]([SubResource("Resource_tkn8r"), SubResource("Resource_6acc5")])

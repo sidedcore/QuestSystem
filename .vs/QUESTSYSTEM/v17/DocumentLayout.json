@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "F:\\Godot\\Projects\\QuestSystem\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7280FEB7-F213-4BAD-BFD3-7EA0CA459C44}|QuestSystem.csproj|f:\\godot\\projects\\questsystem\\questmangerdisplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7280FEB7-F213-4BAD-BFD3-7EA0CA459C44}|QuestSystem.csproj|solutionrelative:questmangerdisplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "QuestMangerDisplay.cs",
+              "DocumentMoniker": "F:\\Godot\\Projects\\QuestSystem\\QuestMangerDisplay.cs",
+              "RelativeDocumentMoniker": "QuestMangerDisplay.cs",
+              "ToolTip": "F:\\Godot\\Projects\\QuestSystem\\QuestMangerDisplay.cs",
+              "RelativeToolTip": "QuestMangerDisplay.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-06T21:21:31.963Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdxrseym17hms"]
+
+[ext_resource type="Script" path="res://addons/QuestSystem/QuestElement.cs" id="1_yqeew"]
+[ext_resource type="PackedScene" uid="uid://ub3cb62esv4a" path="res://elements/QuestStageElement.tscn" id="2_fk583"]
+
+[node name="QuestElement" type="PanelContainer" node_paths=PackedStringArray("QuestName_Label", "QuestDescription_Label", "QuestStages_VBoxContainer")]
+script = ExtResource("1_yqeew")
+QuestName_Label = NodePath("MarginContainer/VBoxContainer/Label")
+QuestDescription_Label = NodePath("MarginContainer/VBoxContainer/Label2")
+QuestObjectiveElement = ExtResource("2_fk583")
+QuestStages_VBoxContainer = NodePath("MarginContainer/VBoxContainer/MarginContainer/VBoxContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quest Name"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quest Description"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2

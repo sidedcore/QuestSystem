@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://bx0ei5r0teh3e"]
+
+[ext_resource type="Script" path="res://QuestMangerDisplay.cs" id="1_om0ia"]
+[ext_resource type="Resource" uid="uid://423jdb5ixud8" path="res://QuestLog.tres" id="2_mbeu1"]
+[ext_resource type="PackedScene" uid="uid://bdxrseym17hms" path="res://elements/QuestElement.tscn" id="4_drygh"]
+
+[node name="Control" type="Control" node_paths=PackedStringArray("VBox_QuestContainer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_om0ia")
+QuestLog = ExtResource("2_mbeu1")
+VBox_QuestContainer = NodePath("Container/PanelContainer/VBoxContainer/PanelContainer/VBoxContainer")
+QuestElement = ExtResource("4_drygh")
+
+[node name="Container" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 10.0
+offset_right = 437.0
+offset_bottom = 438.0
+
+[node name="PanelContainer" type="PanelContainer" parent="Container"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container/PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Container/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Container/PanelContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "Quest log"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="MarginContainer" parent="Container/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+metadata/_edit_group_ = true
+
+[node name="Panel" type="PanelContainer" parent="Container/PanelContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container/PanelContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
