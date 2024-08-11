@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="QuestSystem"
-run/main_scene="res://tmp.tscn"
+run/main_scene="res://addons/QuestSystem/DemoScene/QuestLogDisplayed.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 

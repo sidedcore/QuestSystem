@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://bdxrseym17hms"]
 
-[ext_resource type="Script" path="res://addons/QuestSystem/QuestElement.cs" id="1_yqeew"]
-[ext_resource type="PackedScene" uid="uid://ub3cb62esv4a" path="res://elements/QuestStageElement.tscn" id="2_fk583"]
+[ext_resource type="Script" path="res://addons/QuestSystem/UI Elements/QuestElement.cs" id="1_6wfjy"]
+[ext_resource type="PackedScene" uid="uid://ub3cb62esv4a" path="res://addons/QuestSystem/DemoScene/elements/QuestStageElement.tscn" id="2_fk583"]
 
 [node name="QuestElement" type="PanelContainer" node_paths=PackedStringArray("QuestName_Label", "QuestDescription_Label", "QuestStages_VBoxContainer")]
-script = ExtResource("1_yqeew")
+script = ExtResource("1_6wfjy")
 QuestName_Label = NodePath("MarginContainer/VBoxContainer/Label")
 QuestDescription_Label = NodePath("MarginContainer/VBoxContainer/Label2")
-QuestObjectiveElement = ExtResource("2_fk583")
+QuestStageElement = ExtResource("2_fk583")
 QuestStages_VBoxContainer = NodePath("MarginContainer/VBoxContainer/MarginContainer/VBoxContainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

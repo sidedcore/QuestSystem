@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=9 format=3 uid="uid://dtq453xkkcgig"]
+
+[ext_resource type="Script" path="res://addons/QuestSystem/scripts/QuestStage.cs" id="1_e62c2"]
+[ext_resource type="Texture2D" uid="uid://8gr1q0tgibgf" path="res://icon.svg" id="1_gdasn"]
+[ext_resource type="Script" path="res://addons/QuestSystem/scripts/Quest.cs" id="1_xkq45"]
+[ext_resource type="Script" path="res://addons/QuestSystem/QuestStageObjectives/QuestStageObjective.cs" id="2_3f8kr"]
+
+[sub_resource type="Resource" id="Resource_y78ym"]
+script = ExtResource("2_3f8kr")
+ObjectiveTargetName = "wood"
+ObjectiveTargetQuantity = 174
+ObjectiveComplete = false
+
+[sub_resource type="Resource" id="Resource_yl75r"]
+script = ExtResource("2_3f8kr")
+ObjectiveTargetName = "craig"
+ObjectiveTargetQuantity = 1
+ObjectiveComplete = true
+
+[sub_resource type="Resource" id="Resource_tkn8r"]
+script = ExtResource("1_e62c2")
+QuestStageId = 100
+QuestStageComplete = false
+QuestStageDescription = "Gather resources"
+QuestStageObjectives = Array[Object]([SubResource("Resource_y78ym"), SubResource("Resource_yl75r")])
+NextQuestStage = -1
+
+[sub_resource type="Resource" id="Resource_6acc5"]
+script = ExtResource("1_e62c2")
+QuestStageId = 101
+QuestStageComplete = false
+QuestStageDescription = "Get a new car"
+QuestStageObjectives = []
+NextQuestStage = -1
+
+[resource]
+script = ExtResource("1_xkq45")
+QuestId = 10001
+QuestStatus = 1
+QuestIcon = ExtResource("1_gdasn")
+QuestTitle = "This is a sample quest"
+QuestDescription = "The description will go here"
+isQuestActive = false
+QuestStages = Array[Resource]([SubResource("Resource_tkn8r"), SubResource("Resource_6acc5")])

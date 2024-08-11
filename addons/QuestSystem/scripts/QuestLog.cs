@@ -1,38 +1,51 @@
+using System.Linq;
 using Godot;
 using Godot.Collections;
 
 [GlobalClass]
 public partial class QuestLog : Resource
 {
-    [Export]
-    public Dictionary<int, Quest> _QuestLog = new Dictionary<int, Quest>();
+    [Signal]
+    public delegate void NewQuestAddedEventHandler(Quest addedQuest);
+    [Signal]
+    public delegate void QuestCompleteEventHandler(Quest updatedQuest);
 
-    public void StartQuest(Quest quest)
+    [Export]
+    public Dictionary<int, Quest> _QuestLog = new();
+
+    public void AddNewQuest(Quest quest)
     {
-        quest.StartQuest();
+        if (_QuestLog.ContainsKey(quest.QuestId))
+        {
+            GD.Print("Possible duplicate quest attempting to be added");
+            return;
+        }
+
         _QuestLog.Add(quest.QuestId, quest);
+        quest.StartQuest();
+        EmitSignal(nameof(NewQuestAdded), quest);
     }
 
-    public void AdvanceQuestStage(Quest quest)
+    public void AdvanceQuestStageObjective(Quest quest)
     {
         Quest targetQuest = HasQuestAndIsActive(quest);
         if (targetQuest == null) return;
 
-        targetQuest.AdvanceQuestStage();
-        //Emit quest updated event
+        targetQuest.MarkQuestStageObjectiveComplete(quest.QuestStages.First().QuestStageObjectives.First());
     }
 
-    public void CompleteQuest(Quest quest)
+    void CompleteQuest(Quest quest)
     {
         Quest targetQuest = HasQuestAndIsActive(quest);
         if (targetQuest == null) return;
         targetQuest.CompleteQuest();
+        EmitSignal(nameof(QuestComplete), quest);
     }
 
-    private Quest HasQuestAndIsActive(Quest quest)
+    Quest HasQuestAndIsActive(Quest quest)
     {
         _QuestLog.TryGetValue(quest.QuestId, out Quest targetQuest);
-        if (targetQuest.QuestStatus.Equals(QuestStatus.InProgress) && targetQuest.isActive)
+        if (targetQuest.QuestStatus.Equals(QuestStatus.InProgress) && targetQuest.isQuestActive)
         {
             return targetQuest;
         }

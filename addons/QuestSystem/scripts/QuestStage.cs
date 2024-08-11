@@ -5,39 +5,54 @@ using Godot.Collections;
 [GlobalClass]
 public partial class QuestStage : Resource
 {
+    [Signal]
+    public delegate void QuestStageUpdateEventHandler(QuestStage questStage);
+    [Signal]
+    public delegate void QuestStageCompletedEventHandler(QuestStage questStage);
     [Export]
-    public int QuestStageId { get; set; }
-    public bool IsQuestStageActive { get; set; } = false;
-    public bool IsQuestStageComplete { get; set; } = false;
+    public int QuestStageId;
     [Export]
-    public string QuestStageDescription { get; set; }
+    public bool QuestStageComplete;
+
+    public bool IsQuestStageActive;
+    public bool IsQuestStageComplete
+    {
+        get
+        {
+            VerifyQuestStageComplete();
+            return QuestStageComplete;
+        }
+        set
+        {
+            return;
+        }
+    }
+
+    [Export]
+    public string QuestStageDescription;
     [Export(PropertyHint.ResourceType)]
-    public Array<QuestStageObjective> stageObjectives { get; set; }
+    public Array<QuestStageObjective> QuestStageObjectives = new();
 
     [Export]
     //-1 no next quest stage
     public int NextQuestStage = -1;
 
-    public void SetStageActive()
+    public void SetQuestStageActive()
     {
         GD.Print($"Starting questStage: {QuestStageId}");
         IsQuestStageActive = true;
-        IsQuestStageComplete = false;
+        QuestStageComplete = false;
+        EmitSignal(nameof(QuestStageUpdate), this);
     }
 
-    public bool HasObjectiveBeenMet
+    private void VerifyQuestStageComplete()
     {
-        get
+        var allObjectivesCompleted = QuestStageObjectives.All(x => x.IsObjectiveComplete);
+        if (QuestStageObjectives.Count > 1 && allObjectivesCompleted)
         {
-            if (!IsQuestStageActive) return false;
-            
-            return true;
+            IsQuestStageActive = false;
+            QuestStageComplete = true;
+            EmitSignal(nameof(QuestStageCompleted), this);
         }
-    }
-
-    public void CompleteQuestStage()
-    {
-        IsQuestStageActive = false;
-        IsQuestStageComplete = true;
     }
 }

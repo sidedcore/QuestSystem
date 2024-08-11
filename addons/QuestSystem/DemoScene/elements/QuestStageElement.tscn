@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ub3cb62esv4a"]
 
-[ext_resource type="Script" path="res://addons/QuestSystem/QuestStageElement.cs" id="1_k2yo8"]
-[ext_resource type="PackedScene" uid="uid://maao6173cfoq" path="res://elements/QuestObjectiveElement.tscn" id="2_e87mj"]
+[ext_resource type="Script" path="res://addons/QuestSystem/UI Elements/QuestStageElement.cs" id="1_k2yo8"]
+[ext_resource type="PackedScene" uid="uid://maao6173cfoq" path="res://addons/QuestSystem/DemoScene/elements/QuestStageObjectiveElement.tscn" id="2_mp7ss"]
 
 [node name="QuestStageElement" type="PanelContainer" node_paths=PackedStringArray("QuestStageDescription", "CheckBox", "QuestObjectiveContainer")]
 offset_right = 166.0
@@ -10,7 +10,7 @@ script = ExtResource("1_k2yo8")
 QuestStageDescription = NodePath("HBoxContainer/VboxContainer/MarginContainer/Label")
 CheckBox = NodePath("HBoxContainer/VboxContainer/CheckBox")
 QuestObjectiveContainer = NodePath("HBoxContainer/QuestObjectiveContainer")
-QuestObjectiveElement = ExtResource("2_e87mj")
+QuestStageObjectiveElement = ExtResource("2_mp7ss")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -33,7 +33,7 @@ theme_override_constants/margin_bottom = 4
 
 [node name="Label" type="Label" parent="HBoxContainer/VboxContainer/MarginContainer"]
 layout_mode = 2
-text = "Quest Objective"
+text = "Stage"
 
 [node name="QuestObjectiveContainer" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2

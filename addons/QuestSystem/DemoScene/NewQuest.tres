@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=5 format=3 uid="uid://bvkxyg2c51l4h"]
+
+[ext_resource type="Script" path="res://addons/QuestSystem/scripts/QuestStage.cs" id="1_t7wbc"]
+[ext_resource type="Script" path="res://addons/QuestSystem/scripts/Quest.cs" id="4_ukgqa"]
+
+[sub_resource type="Resource" id="Resource_tkn8r"]
+script = ExtResource("1_t7wbc")
+QuestStageId = 100
+QuestStageComplete = false
+QuestStageDescription = "Gather resources"
+QuestStageObjectives = null
+NextQuestStage = -1
+
+[sub_resource type="Resource" id="Resource_6acc5"]
+script = ExtResource("1_t7wbc")
+QuestStageId = 101
+QuestStageComplete = false
+QuestStageDescription = "Get a new car"
+QuestStageObjectives = null
+NextQuestStage = -1
+
+[resource]
+script = ExtResource("4_ukgqa")
+QuestId = 10001
+QuestStatus = 1
+QuestTitle = "This is a sample quest"
+QuestDescription = "The description will go here"
+isQuestActive = false
+QuestStages = Array[Resource]([SubResource("Resource_tkn8r"), SubResource("Resource_6acc5")])
+QuestCategory = 1

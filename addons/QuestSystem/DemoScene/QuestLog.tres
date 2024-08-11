@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="QuestLog" load_steps=2 format=3 uid="uid://423jdb5ixud8"]
+
+[ext_resource type="Script" path="res://addons/QuestSystem/scripts/QuestLog.cs" id="1_ul3i0"]
+
+[resource]
+script = ExtResource("1_ul3i0")
+_QuestLog = {}

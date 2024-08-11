@@ -5,71 +5,94 @@ using Godot.Collections;
 [GlobalClass]
 public partial class Quest : Resource
 {
-    [Export]
-    public int QuestId { get; set; }
-    [Export]
-    public QuestStatus QuestStatus { get; set; }
-    [Export(PropertyHint.ResourceType)]
-    public Texture2D QuestIcon { get; set; }
-    [Export]
-    public string QuestTitle { get; set; }
-    [Export]
-    public string QuestDescription { get; set; }
-    [Export]
-    public bool isActive;
-    [Export(PropertyHint.ResourceType)]
-    public Array<QuestStage> QuestStages { get; set; }
+    [Signal]
+    public delegate void QuestUpdateEventHandler(Quest quest);
+    [Signal]
+    public delegate void QuestNewStageEventHandler(Quest quest);
 
+    [Export]
+    public int QuestId;
+    [Export]
+    public QuestStatus QuestStatus;
+    [Export(PropertyHint.ResourceType)]
+    public Texture2D QuestIcon;
+    [Export]
+    public string QuestTitle;
+    [Export]
+    public string QuestDescription;
+    [Export]
+    public bool isQuestActive;
+    [Export(PropertyHint.ResourceType)]
+    public Array<QuestStage> QuestStages;
+    [Export]
+    public QuestCategory QuestCategory;
     public void StartQuest()
     {
         QuestStatus = QuestStatus.Started;
         GD.Print($"Starting quest: {QuestId}");
-        isActive = true;
-        QuestStages.First().SetStageActive();
+        isQuestActive = true;
+        EmitSignal(nameof(QuestUpdate), this);
 
+        SetQuestStateActive();
+    }
+
+    private void SetQuestStateActive()
+    {
         GD.Print($"quest:{QuestId}. In progress");
         QuestStatus = QuestStatus.InProgress;
+        QuestStages.First(x => x.IsQuestStageActive == false).SetQuestStageActive();
+        EmitSignal(nameof(QuestUpdate), this);
+    }
+
+    public void FailQuest()
+    {
+        QuestStatus = QuestStatus.Failed;
+        isQuestActive = false;
+        EmitSignal(nameof(QuestUpdate), this);
     }
 
     public void CompleteQuest()
     {
         QuestStatus = QuestStatus.Completed;
-        isActive = false;
+        isQuestActive = false;
+        EmitSignal(nameof(QuestUpdate), this);
     }
+
     public QuestStage GetCurrentQuestStage()
     {
         return QuestStages.Where(x => x.IsQuestStageActive).First();
     }
 
-    public void AdvanceQuestStage()
+    public void MarkQuestStageObjectiveComplete(QuestStageObjective questStageObjective)
     {
-        var currentQuestStage = GetCurrentQuestStage();
-        if (currentQuestStage.HasObjectiveBeenMet)
+        var questStage = QuestStages.Where(x => x.QuestStageObjectives.Contains(questStageObjective)).First();
+
+        var questObj = questStage.QuestStageObjectives.First(x => x == questStageObjective);
+
+        if (questObj == null) return;
+
+        questObj.CompleteQuestStageObjective();
+        if (questStage.IsQuestStageComplete)
         {
-            GD.Print("Quest stages complete");
-            //check if there are any next stages
-            var stageIndex = QuestStages.IndexOf(currentQuestStage);
-
-            if (stageIndex != -1 && stageIndex < QuestStages.Count)
+            var questStillContainsStages = QuestStages.All(x => x.IsQuestStageActive == false);
+            if (questStillContainsStages)
             {
-                if (currentQuestStage.NextQuestStage != -1)
+                if (questStage.NextQuestStage == -1)
                 {
-                    currentQuestStage.CompleteQuestStage();
-                    QuestStages.Where(x => x.QuestStageId == currentQuestStage.NextQuestStage).First().SetStageActive();
-
+                    QuestStages.First(x => x.IsQuestStageActive == false && x.IsQuestStageComplete == false).SetQuestStageActive();
                 }
                 else
                 {
-                    currentQuestStage.CompleteQuestStage();
-                    QuestStages[stageIndex + 1].SetStageActive();
+                    QuestStages.First(x => x.QuestStageId == questStage.NextQuestStage).SetQuestStageActive();
                 }
+
+                EmitSignal(nameof(QuestNewStage), this);
             }
             else
             {
-                //at the end of quest stages??
                 CompleteQuest();
             }
         }
+        EmitSignal(nameof(QuestUpdate), this);
     }
-
 }

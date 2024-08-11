@@ -1,8 +1,13 @@
-[gd_scene format=3 uid="uid://maao6173cfoq"]
+[gd_scene load_steps=2 format=3 uid="uid://maao6173cfoq"]
 
-[node name="QuestObjectiveElement" type="PanelContainer"]
+[ext_resource type="Script" path="res://addons/QuestSystem/UI Elements/QuestStageObjectiveElement.cs" id="1_cnixq"]
+
+[node name="QuestStageObjectiveElement" type="PanelContainer" node_paths=PackedStringArray("checkBox", "questLabel")]
 offset_right = 156.0
 offset_bottom = 29.0
+script = ExtResource("1_cnixq")
+checkBox = NodePath("HBoxContainer/CheckBox")
+questLabel = NodePath("HBoxContainer/MarginContainer/QuestObjective_Label")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -22,4 +27,4 @@ theme_override_constants/margin_bottom = 4
 
 [node name="QuestObjective_Label" type="Label" parent="HBoxContainer/MarginContainer"]
 layout_mode = 2
-text = "Quest Objective"
+text = "Objective"
